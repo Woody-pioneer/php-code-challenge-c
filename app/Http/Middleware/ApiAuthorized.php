@@ -18,7 +18,7 @@ class ApiAuthorized
 
         $api_key = $request->input('api_key');//default:12345678
         if ($api_key !== env('API_KEY')) {
-            return response()->json(['error' => "API key is not correct"], 500);
+            return response()->json(['error' => "API key or Parameters  not correct"], 500);
         }
         return $next($request);
     }
