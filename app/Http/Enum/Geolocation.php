@@ -12,7 +12,8 @@ class Geolocation
     const FREEGEOIP    = 'freegeoip';
 
     //error message
-    const url_error    = 'API key or Parameters  not correct';
-    const ip_address_error    = 'Can not analyze IP or invalid IP';
+    const url_error             = 'API key or Parameters  not correct';
+    const ip_address_error      = 'Can not analyze IP or invalid IP';
+    const city_address_error    = 'Can not locate the city from IP address';
 
 }

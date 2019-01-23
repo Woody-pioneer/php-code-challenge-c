@@ -201,7 +201,7 @@ class GeolocationController extends Controller
         if(!empty($city)){
             $weather = $this->getWeatherFromCity($city);
         }else{
-            return response()->json(['error' => Geolocation::ip_address_error], 500);
+            return response()->json(['error' => Geolocation::city_address_error], 500);
         }
         $result = [
             'ip'   => $ip_address,
