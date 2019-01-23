@@ -11,7 +11,7 @@
 
 #####For retrieve geolocation from IP,make sure you have two:
 - api_key. default value is 12345678
-- service. ip-api or freegoip
+- service. ip-api or freegeoip(attention: freegeoip is not guranteed for retrieving the city,however it gets more infos)
 - valid ip address. ex: 172.253.7.4 (127.0.0.1 will not be valid)
 - laravel:5.7 PHP:7.1+
 
@@ -25,4 +25,4 @@
 #####installation
 - git clone
 - composer install
-- copy env.example to .env
+- copy env.example to .env,  generate a new key if necessary.
