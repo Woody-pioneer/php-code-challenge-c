@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+    Route::get('geolocation','Api\GeolocationController@geoCode');
+    Route::get('geolocation/{id_address}','Api\GeolocationController@geoCodeByIp');
+    Route::get('weather','Api\GeolocationController@weather');
+    Route::get('weather/{id_address}','Api\GeolocationController@weatherByIp');
