@@ -25,3 +25,4 @@
 #####installation
 - git clone
 - composer install
+- copy env.example to .env

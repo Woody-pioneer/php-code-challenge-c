@@ -25,7 +25,7 @@ class GeolocationController extends Controller
         $ip         = $request->getClientIp();
         $service    = trim($request->input('service'));
         if(!$this->validateIP($ip)){
-            return response()->json(['error' => "Can not analyze local IP : $ip"], 500);
+            return response()->json(['error' => Geolocation::ip_address_error], 500);
         }
         $geo    = $this->getGeolocationFromIP($ip, $service);
         $result = [
@@ -45,7 +45,7 @@ class GeolocationController extends Controller
     {
         $service    = trim($request->input('service'));
         if(!$this->validateIP($ip_address)){
-            return response()->json(['error' => "Can not analyze local IP : $ip_address"], 500);
+            return response()->json(['error' => Geolocation::ip_address_error], 500);
         }
         $geo     = $this->getGeolocationFromIP($ip_address, $service);
         $result = [
@@ -178,7 +178,7 @@ class GeolocationController extends Controller
         if(!empty($city)){
             $weather = $this->getWeatherFromCity($city);
         }else{
-            return response()->json(['error' => "Can not analyze this IP : $ip "], 500);
+            return response()->json(['error' => Geolocation::ip_address_error], 500);
         }
         $result = [
             'ip'   => $ip,
@@ -201,7 +201,7 @@ class GeolocationController extends Controller
         if(!empty($city)){
             $weather = $this->getWeatherFromCity($city);
         }else{
-            return response()->json(['error' => "Can not analyze this IP : $ip_address"], 500);
+            return response()->json(['error' => Geolocation::ip_address_error], 500);
         }
         $result = [
             'ip'   => $ip_address,
