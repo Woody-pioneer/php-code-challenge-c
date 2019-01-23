@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Enum\Geolocation;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\GeolocationTrait;
 use Illuminate\Http\Request;
 
 class GeolocationController extends Controller
 {
+    use GeolocationTrait;
+
     public function __construct()
     {
 
@@ -60,10 +64,10 @@ class GeolocationController extends Controller
     {
        $service = strtolower($url_service);
         switch ($service){
-            case 'ip-api':
+            case Geolocation::IPAPI:
                 $url=env('IPAPI_API_SERVER').$valid_ip_address;
                 break;
-            case 'freegeoip':
+            case Geolocation::FREEGEOIP:
                 $params=[
                     'access_key'=>env('IPSTACK_API_KEY'),
                     'format'  =>1,
@@ -71,7 +75,7 @@ class GeolocationController extends Controller
                 $url=env('IPSTACK_API_SERVER')."$valid_ip_address?".http_build_query($params);
                 break;
             default:
-                $service='ip-api';
+                $service=Geolocation::IPAPI;
                 $url=env('IPAPI_API_SERVER').$valid_ip_address;
                 break;
         }
@@ -90,7 +94,7 @@ class GeolocationController extends Controller
             'region'  => null,
             'country' => null,
         ];
-        if ($service === 'ip-api') {
+        if ($service === Geolocation::IPAPI) {
             $result = unserialize($body);
             if (isset($result['status']) && $result['status'] == 'success') {
                 $geo = [
@@ -118,7 +122,7 @@ class GeolocationController extends Controller
      */
     private function getWeatherFromCity($city): array
     {
-        $url    = env('WEATHER_API');
+        $url    = env('WEATHER_API_SERVER');
         $params = [
             'q'     => $city,
             'units' => 'metric',
@@ -208,15 +212,6 @@ class GeolocationController extends Controller
         return response()->json($result, 200);
     }
 
-    /** check api user authorized or not
-     * @param Request $request
-     * @return bool
-     */
-    private function validateIP($ip)
-    {
-        $validateIP = filter_var($ip, FILTER_VALIDATE_IP);
 
-        return $validateIP ? true : false;
-    }
 
 }
